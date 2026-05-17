@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Article Reflexion Agent" id="article-agent-flow">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ============ TITLE ============ -->
+        <mxCell id="title" value="Article Reflexion Agent — State Flow Through Nodes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=22;fontStyle=1;fontColor=#FFFFFF;fillColor=#1A237E;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="50" y="20" width="1000" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- ============ STATE SCHEMA PANEL ============ -->
+        <mxCell id="schema-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="475" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="schema-title" value="State (TypedDict)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="65" y="112" width="200" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="schema-fields" value="topic       : str&#10;messages    : list[BaseMessage]&#10;rating      : int&#10;iteration   : int" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontSize=13;fontColor=#212121;spacing=4;" vertex="1" parent="1">
+          <mxGeometry x="70" y="142" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="schema-note" value="(only `messages` has an Annotated reducer)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#555555;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="70" y="252" width="430" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- ============ REDUCER LEGEND ============ -->
+        <mxCell id="legend-bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="575" y="100" width="475" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-title" value="How updates merge (the reducer rule)" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="590" y="112" width="350" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-plus-icon" value="✚" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=18;fontStyle=1;fontColor=#FFFFFF;fillColor=#43A047;strokeColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="590" y="148" width="32" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-plus-text" value="`messages` has `add_messages` reducer → values are APPENDED to the list" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#212121;" vertex="1" parent="1">
+          <mxGeometry x="632" y="148" width="410" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-arrow-icon" value="►" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=18;fontStyle=1;fontColor=#FFFFFF;fillColor=#FB8C00;strokeColor=#EF6C00;" vertex="1" parent="1">
+          <mxGeometry x="590" y="195" width="32" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-arrow-text" value="all other fields have no reducer → values are OVERWRITTEN" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#212121;" vertex="1" parent="1">
+          <mxGeometry x="632" y="195" width="410" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-rule" value="Each node returns a PARTIAL dict — only the keys it wants to change.&#10;LangGraph merges that dict in using each field's reducer above." style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="590" y="240" width="450" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ============ START ============ -->
+        <mxCell id="start" value="START" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=#424242;strokeWidth=2;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="195" y="330" width="110" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- ============ search node + state panel ============ -->
+        <mxCell id="search" value="🔍&#10;&#10;search&#10;&#10;Tavily web search&#10;Builds the seed HumanMessage&#10;with research bullets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B3E5FC;strokeColor=#0277BD;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="410" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="state-search" value="State after `search`" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#0277BD;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="450" y="410" width="580" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="state-search-body" value="&lt;span style=&quot;color:#9E9E9E&quot;&gt;_&lt;/span&gt;&amp;nbsp;&amp;nbsp;topic&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(input from user)&lt;br&gt;&lt;span style=&quot;color:#43A047;font-weight:bold&quot;&gt;✚&lt;/span&gt;&amp;nbsp;messages&amp;nbsp;&amp;nbsp;&amp;nbsp;+ seed HumanMessage (topic + Tavily bullets)&lt;br&gt;&lt;span style=&quot;color:#FB8C00;font-weight:bold&quot;&gt;►&lt;/span&gt;&amp;nbsp;rating&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;= 0&amp;nbsp;&amp;nbsp;(reset)&lt;br&gt;&lt;span style=&quot;color:#FB8C00;font-weight:bold&quot;&gt;►&lt;/span&gt;&amp;nbsp;iteration&amp;nbsp;&amp;nbsp;= 0&amp;nbsp;&amp;nbsp;(reset)" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontSize=13;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="465" y="440" width="555" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ============ writer node + state panel ============ -->
+        <mxCell id="writer" value="✍️&#10;&#10;writer&#10;&#10;writer_chain.invoke(messages)&#10;→ AIMessage (the article draft)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF59D;strokeColor=#F9A825;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="570" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="state-writer" value="State after `writer`" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#F9A825;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="450" y="570" width="580" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="state-writer-body" value="&lt;span style=&quot;color:#9E9E9E&quot;&gt;_&lt;/span&gt;&amp;nbsp;&amp;nbsp;topic&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(unchanged)&lt;br&gt;&lt;span style=&quot;color:#43A047;font-weight:bold&quot;&gt;✚&lt;/span&gt;&amp;nbsp;messages&amp;nbsp;&amp;nbsp;&amp;nbsp;+ draft (AIMessage from the LLM)&lt;br&gt;&lt;span style=&quot;color:#9E9E9E&quot;&gt;_&lt;/span&gt;&amp;nbsp;&amp;nbsp;rating&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(unchanged)&lt;br&gt;&lt;span style=&quot;color:#FB8C00;font-weight:bold&quot;&gt;►&lt;/span&gt;&amp;nbsp;iteration&amp;nbsp;&amp;nbsp;= iteration + 1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontSize=13;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="465" y="600" width="555" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ============ critic node + state panel ============ -->
+        <mxCell id="critic" value="🧐&#10;&#10;critic&#10;&#10;critic_chain.invoke(messages)&#10;→ Critique(rating, critique)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="730" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="state-critic" value="State after `critic`" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#2E7D32;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="450" y="730" width="580" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="state-critic-body" value="&lt;span style=&quot;color:#9E9E9E&quot;&gt;_&lt;/span&gt;&amp;nbsp;&amp;nbsp;topic&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(unchanged)&lt;br&gt;&lt;span style=&quot;color:#43A047;font-weight:bold&quot;&gt;✚&lt;/span&gt;&amp;nbsp;messages&amp;nbsp;&amp;nbsp;&amp;nbsp;+ feedback HumanMessage (critique wrapped as user message)&lt;br&gt;&lt;span style=&quot;color:#FB8C00;font-weight:bold&quot;&gt;►&lt;/span&gt;&amp;nbsp;rating&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;= result.rating  (1-10 from Pydantic)&lt;br&gt;&lt;span style=&quot;color:#9E9E9E&quot;&gt;_&lt;/span&gt;&amp;nbsp;&amp;nbsp;iteration&amp;nbsp;&amp;nbsp;(unchanged)" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontSize=13;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="465" y="760" width="555" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ============ decision diamond ============ -->
+        <mxCell id="decision" value="rating ≥ 8 ?&#10;or&#10;iteration ≥ 3 ?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#AD1457;strokeWidth=2;fontSize=13;fontStyle=1;fontColor=#880E4F;" vertex="1" parent="1">
+          <mxGeometry x="150" y="890" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- decision side annotation -->
+        <mxCell id="decision-note" value="should_continue()&#10;is the conditional-edge function.&#10;It reads `rating` and `iteration`&#10;from state and returns the name&#10;of the next node:&#10;&#10;&#xa0;&#xa0;&quot;writer&quot;   →  loop again&#10;&#xa0;&#xa0;&quot;save&quot;     →  done" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AD1457;strokeWidth=1;dashed=1;fontSize=12;align=left;verticalAlign=middle;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="450" y="890" width="580" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ============ save node + state panel ============ -->
+        <mxCell id="save" value="💾&#10;&#10;save&#10;&#10;Pick the last AIMessage as the&#10;final article. Write to outputs/article.md" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#6A1B9A;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="1030" width="260" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="state-save" value="State after `save`" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#6A1B9A;strokeWidth=2;fontSize=13;fontStyle=1;align=center;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="450" y="1030" width="580" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="state-save-body" value="&lt;span style=&quot;color:#9E9E9E&quot;&gt;_&lt;/span&gt;&amp;nbsp;&amp;nbsp;(no state changes — save is a side-effect node)&lt;br&gt;&lt;br&gt;Writes the file outputs/article.md containing&lt;br&gt;the last AIMessage from `messages` plus a header." style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontFamily=Courier New;fontSize=13;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="465" y="1060" width="555" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- ============ END ============ -->
+        <mxCell id="end" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0E0E0;strokeColor=#424242;strokeWidth=2;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="195" y="1190" width="110" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- ============ EDGES ============ -->
+        <!-- START → search -->
+        <mxCell id="e1" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#212121;" edge="1" parent="1" source="start" target="search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- search → writer -->
+        <mxCell id="e2" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#212121;" edge="1" parent="1" source="search" target="writer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- writer → critic -->
+        <mxCell id="e3" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#212121;" edge="1" parent="1" source="writer" target="critic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- critic → decision -->
+        <mxCell id="e4" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#212121;" edge="1" parent="1" source="critic" target="decision">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- decision → save (YES) -->
+        <mxCell id="e5" value="YES" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=3;strokeColor=#2E7D32;fontStyle=1;fontColor=#2E7D32;fontSize=12;" edge="1" parent="1" source="decision" target="save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- save → END -->
+        <mxCell id="e6" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;strokeColor=#212121;" edge="1" parent="1" source="save" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- LOOP: decision → writer (NO) — curves around the left -->
+        <mxCell id="loop" value="NO — rating &lt; 8&#10;(loop back, critique&#10;is now in messages)" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=3;strokeColor=#C62828;fontStyle=1;fontColor=#C62828;fontSize=12;curved=1;edgeStyle=orthogonalEdgeStyle;rounded=1;align=left;verticalAlign=middle;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="decision" target="writer">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="940" />
+              <mxPoint x="60" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Dotted connector lines from each node to its state panel -->
+        <mxCell id="dot1" style="endArrow=open;endFill=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=1;strokeColor=#0277BD;dashed=1;" edge="1" parent="1" source="search" target="state-search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dot2" style="endArrow=open;endFill=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=1;strokeColor=#F9A825;dashed=1;" edge="1" parent="1" source="writer" target="state-writer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dot3" style="endArrow=open;endFill=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=1;strokeColor=#2E7D32;dashed=1;" edge="1" parent="1" source="critic" target="state-critic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dot4" style="endArrow=open;endFill=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=1;strokeColor=#AD1457;dashed=1;" edge="1" parent="1" source="decision" target="decision-note">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dot5" style="endArrow=open;endFill=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=1;strokeColor=#6A1B9A;dashed=1;" edge="1" parent="1" source="save" target="state-save">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ============ FOOTER NOTE ============ -->
+        <mxCell id="footer" value="The loop fires when rating &lt; 8.  On each loop, `messages` grows by 2 (one draft + one critique),&#10;`iteration` increments, and `rating` is overwritten.  The conversation history IS the working memory." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=1;fontSize=12;align=center;verticalAlign=middle;fontStyle=2;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1270" width="1000" height="60" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

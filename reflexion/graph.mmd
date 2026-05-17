@@ -1,0 +1,23 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	web_search(web_search)
+	prompt_writer(prompt_writer)
+	generator(generator)
+	critic(critic)
+	saver(saver)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> web_search;
+	critic -.-> prompt_writer;
+	critic -.-> saver;
+	generator --> critic;
+	prompt_writer --> generator;
+	web_search --> prompt_writer;
+	saver --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
